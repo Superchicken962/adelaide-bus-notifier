@@ -85,7 +85,7 @@ async function checkForStaticFilesUpdate() {
     const onlineVersion = await getLatestDataVersion();
     const localVersion = readStaticFileContent("current_version.txt");
 
-    if (onlineVersion === localVersion) {
+    if (onlineVersion.toString() === localVersion.toString()) {
         console.log("Static files are up to date!");
     } else {
         console.log("Updating static files...");
@@ -110,7 +110,59 @@ function getLatestDataVersion() {
     });
 }
 
+const findInFile = {
+    routeInfoByRoute: (route, text_content) => {
+        if (!text_content) text_content = readStaticFileContent("routes.txt");
+
+        // Split by newline to get all routes, then find it by the route id (First column).
+        const findRoute = text_content.split("\r\n").find(row => row.split(",")[0] === route);
+
+        // Format data into object, taking into consideration the commas in route names.
+        let second = ((findRoute.split('"'))[1]).replaceAll(",", "&#44;");
+        let pre = [findRoute.split('"')[0]];
+        pre.push(second);
+        pre.push(findRoute.split('"')[2]);
+        let final = (pre.join("")).split(",");
+        const formattedRoute = {
+            "route_id" : final[0],
+            "agency_id" : final[1],
+            "route_short_name" : final[2],
+            "route_long_name" : final[3],
+            "route_desc" : (final[4].replaceAll("&#44;", ",")),
+            "route_type" : final[5],
+            "route_url" : final[6],
+            "route_color" : final[7],
+            "route_text_color" : final[8],
+            "RouteGroup" : final[9]
+        };
+
+        return formattedRoute;
+    },
+    tripInfoByTripId: (trip_id, text_content) => {
+        if (!text_content) text_content = readStaticFileContent("trips.txt");
+        
+        let findTrip = text_content.split("\r\n").find(row => row.split(",")[2] === trip_id);
+        if (!findTrip) return null;
+
+        findTrip = findTrip.split(",");
+
+        const formattedTrip = { // organise the values in an object
+            "route_id" : findTrip[0],
+            "service_id" : findTrip[1],
+            "trip_id" : findTrip[2],
+            "trip_headsign" : findTrip[3],
+            "trip_short_name" : findTrip[4],
+            "direction_id" : findTrip[5],
+            "block_id" : findTrip[6],
+            "shape_id" : findTrip[7],
+            "wheelchair_accessible" : findTrip[8]
+        };
+        return formattedTrip;
+    }
+};
+
 module.exports = {
     readStaticFileContent,
-    checkForStaticFilesUpdate
+    checkForStaticFilesUpdate,
+    findInFile
 };

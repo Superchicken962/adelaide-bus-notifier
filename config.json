@@ -1,4 +1,7 @@
 {
+    "webhooks": {
+        "vehicleAlert": ""
+    },
     "vehicles": [
         "2801"
     ]
