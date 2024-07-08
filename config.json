@@ -1,8 +1,11 @@
 {
+    "discordId": "",
+    "pingOnVehicle": true,
+    "recheckIntervalSeconds": 120,
     "webhooks": {
         "vehicleAlert": ""
     },
     "vehicles": [
-        "2801"
+        "3401", "3402"
     ]
 }

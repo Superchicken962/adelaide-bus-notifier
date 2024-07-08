@@ -5,5 +5,27 @@
     "jszip": "^3.10.1",
     "puppeteer": "^22.12.1",
     "request": "^2.88.2"
-  }
+  },
+  "name": "adelaide-bus-discord-notifier",
+  "description": "Script to send discord webhook when specified vehicles are in service.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Superchicken962/adelaide-bus-notifier.git"
+  },
+  "keywords": [
+    "adelaide",
+    "adelaide bus",
+    "adelaide buses"
+  ],
+  "author": "mark gurney",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Superchicken962/adelaide-bus-notifier/issues"
+  },
+  "homepage": "https://github.com/Superchicken962/adelaide-bus-notifier#readme"
 }
