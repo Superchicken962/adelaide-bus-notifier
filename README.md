@@ -12,9 +12,11 @@ In `config.json`, you can configure the following:
 - `discordId` - Your discord ID (only needed if you want it to ping you)
 - `pingOnVehicle` - Ping you when a vehicle is found?
 - `recheckIntervalSeconds` - How long to wait before checking again on completion.
+- `chromium-path` - Path to chromium installation on linux. (Leave blank if not required)
 - `webhooks.vehicleAlert` - Where to send the vehicle message (Discord webhook URL).
 - `vehicles` - Array of vehicle IDs that you want to be notified for.
 
 ### Notes
 - While the script has been set to stay online, it may still end from an unexpected error, so it may benefit you to use either [pm2](https://pm2.keymetrics.io/), or a batch script to auto-restart if it does stop.
 - Currently, running the script requires [Node.js](https://nodejs.org/en). Hopefully in the future, this will not be the case.
+- You will likely need a chromium browser to run this, as it uses puppeteer to scrape my website and take a screenshot. If using linux you may need to set `chromium-path` in the config.
