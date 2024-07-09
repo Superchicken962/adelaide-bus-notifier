@@ -101,10 +101,14 @@ function checkVehicles() {
         const tripsFile = readStaticFileContent("trips.txt");
 
         // Launch browser to be navigated in for loop.
-        const browser = await puppeteer.launch({
+        const launchSettings = {
             "headless": "new",
             "defaultViewport": null
-        });
+        }
+
+        // If a chromium path is specified, add it to the launch settings.
+        if (config["chromium-path"]) launchSettings.executablePath = config["chromium-path"];
+        const browser = await puppeteer.launch(launchSettings);
 
         const page = await browser.newPage();
 

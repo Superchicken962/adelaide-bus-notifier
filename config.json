@@ -2,6 +2,7 @@
     "discordId": "",
     "pingOnVehicle": true,
     "recheckIntervalSeconds": 120,
+    "chromium-path": "",
     "webhooks": {
         "vehicleAlert": ""
     },
