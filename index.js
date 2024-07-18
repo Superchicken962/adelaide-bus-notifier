@@ -7,6 +7,9 @@ const { checkForStaticFilesUpdate, findInFile, readStaticFileContent } = require
 const protos = require("google-proto-files");
 const request = require("request");
 
+// Set default timezone to Adelaide (it is an Adelaide bus notifier, of course).
+process.env.TZ = "Australia/Adelaide";
+
 // Perform daily static file checks - won't matter if process is set to terminate before then.
 setInterval(checkForStaticFilesUpdate, 86400000);
 checkForStaticFilesUpdate();
